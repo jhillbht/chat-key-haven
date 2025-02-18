@@ -44,7 +44,17 @@ export function ApiKeyModal({ open, onOpenChange }: ApiKeyModalProps) {
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="api-key">API Key</Label>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="api-key">API Key</Label>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                className="text-green-500 hover:text-green-400 hover:bg-green-500/10"
+              >
+                Get API Keys
+              </Button>
+            </div>
             <Input
               id="api-key"
               type="password"
