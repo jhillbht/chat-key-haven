@@ -4,6 +4,7 @@ import { ChatInput } from "./ChatInput";
 import { MCPSettings } from "./MCPSettings";
 import { LocalLLMSettings } from "./LocalLLMSettings";
 import { LLMSettings } from "./LLMSettings";
+import { ChatHistory } from "./ChatHistory";
 
 interface ChatMainProps {
   selectedSection?: string;
@@ -20,6 +21,10 @@ export function ChatMain({ selectedSection }: ChatMainProps) {
 
   if (selectedSection === "LLM API") {
     return <LLMSettings />;
+  }
+
+  if (selectedSection === "Chat History") {
+    return <ChatHistory />;
   }
 
   return (
