@@ -1,8 +1,17 @@
 
 import { MessageSquare } from "lucide-react";
 import { ChatInput } from "./ChatInput";
+import { MCPSettings } from "./MCPSettings";
 
-export function ChatMain() {
+interface ChatMainProps {
+  selectedSection?: string;
+}
+
+export function ChatMain({ selectedSection }: ChatMainProps) {
+  if (selectedSection === "MCP Install") {
+    return <MCPSettings />;
+  }
+
   return (
     <main className="flex-1 flex flex-col h-screen relative">
       <div className="flex-1 flex items-center justify-center">

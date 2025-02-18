@@ -18,6 +18,10 @@ import {
   History,
 } from "lucide-react";
 
+interface ChatSidebarProps {
+  onSelect?: (section: string) => void;
+}
+
 const sidebarItems = [
   {
     icon: MessageSquare,
@@ -45,7 +49,7 @@ const sidebarItems = [
   },
 ];
 
-export function ChatSidebar() {
+export function ChatSidebar({ onSelect }: ChatSidebarProps) {
   return (
     <Sidebar className="border-r border-chat-border">
       <SidebarHeader className="h-16 flex items-center px-4 glass-panel">
@@ -65,6 +69,7 @@ export function ChatSidebar() {
               <SidebarMenuButton
                 tooltip={item.tooltip}
                 className="relative group"
+                onClick={() => onSelect?.(item.label)}
               >
                 <item.icon className={`w-5 h-5 ${item.color}`} />
                 <span>{item.label}</span>
