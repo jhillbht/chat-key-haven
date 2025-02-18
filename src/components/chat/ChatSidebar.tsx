@@ -10,7 +10,7 @@ import { Menu, Plus } from "lucide-react";
 
 export function ChatSidebar() {
   return (
-    <Sidebar defaultCollapsed className="border-r border-chat-border">
+    <Sidebar className="border-r border-chat-border">
       <SidebarHeader className="h-16 flex items-center px-4 glass-panel">
         <div className="flex items-center justify-between w-full">
           <SidebarTrigger>

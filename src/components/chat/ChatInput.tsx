@@ -1,7 +1,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Image, MagicWand, Mic, Search, Sparkles } from "lucide-react";
+import { Image, Wand2, Mic, Search, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 export function ChatInput() {
@@ -31,7 +31,7 @@ export function ChatInput() {
             <Mic className="w-4 h-4" />
           </Button>
           <Button size="icon" variant="ghost" type="button">
-            <MagicWand className="w-4 h-4" />
+            <Wand2 className="w-4 h-4" />
           </Button>
           <Button size="icon" variant="ghost" type="button">
             <Search className="w-4 h-4" />
