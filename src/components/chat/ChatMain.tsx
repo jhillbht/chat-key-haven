@@ -2,6 +2,7 @@
 import { MessageSquare } from "lucide-react";
 import { ChatInput } from "./ChatInput";
 import { MCPSettings } from "./MCPSettings";
+import { LocalLLMSettings } from "./LocalLLMSettings";
 
 interface ChatMainProps {
   selectedSection?: string;
@@ -10,6 +11,10 @@ interface ChatMainProps {
 export function ChatMain({ selectedSection }: ChatMainProps) {
   if (selectedSection === "MCP Install") {
     return <MCPSettings />;
+  }
+  
+  if (selectedSection === "Local LLM") {
+    return <LocalLLMSettings />;
   }
 
   return (
