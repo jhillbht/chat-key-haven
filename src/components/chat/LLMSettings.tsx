@@ -22,28 +22,28 @@ function ProviderCard({ name, description, isConfigured, isActive }: ProviderCar
         <p className="text-sm text-muted-foreground">{description}</p>
         <div className="flex gap-2 mt-4">
           <Button
-            variant="secondary"
+            variant="ghost"
             size="icon"
-            className="bg-chat-light/20 hover:bg-chat-light/30"
+            className="hover:bg-chat-light/10"
           >
-            <Settings className="w-4 h-4" />
+            <Settings className="w-4 h-4 text-muted-foreground" />
           </Button>
           {isConfigured && (
             <Button
-              variant="secondary"
+              variant="ghost"
               size="icon"
-              className="bg-chat-light/20 hover:bg-chat-light/30"
+              className="hover:bg-chat-light/10"
             >
-              <X className="w-4 h-4" />
+              <X className="w-4 h-4 text-muted-foreground" />
             </Button>
           )}
           {!isConfigured && (
             <Button
-              variant="secondary"
+              variant="ghost"
               size="icon"
-              className="bg-chat-light/20 hover:bg-chat-light/30"
+              className="hover:bg-chat-light/10"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-4 h-4 text-muted-foreground" />
             </Button>
           )}
         </div>
