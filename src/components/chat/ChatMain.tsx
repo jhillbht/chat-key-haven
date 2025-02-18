@@ -3,6 +3,7 @@ import { MessageSquare } from "lucide-react";
 import { ChatInput } from "./ChatInput";
 import { MCPSettings } from "./MCPSettings";
 import { LocalLLMSettings } from "./LocalLLMSettings";
+import { LLMSettings } from "./LLMSettings";
 
 interface ChatMainProps {
   selectedSection?: string;
@@ -15,6 +16,10 @@ export function ChatMain({ selectedSection }: ChatMainProps) {
   
   if (selectedSection === "Local LLM") {
     return <LocalLLMSettings />;
+  }
+
+  if (selectedSection === "LLM API") {
+    return <LLMSettings />;
   }
 
   return (
