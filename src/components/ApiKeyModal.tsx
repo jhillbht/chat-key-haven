@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface ApiKeyModalProps {
   open: boolean;
@@ -18,6 +19,7 @@ interface ApiKeyModalProps {
 
 export function ApiKeyModal({ open, onOpenChange }: ApiKeyModalProps) {
   const [apiKey, setApiKey] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +44,10 @@ export function ApiKeyModal({ open, onOpenChange }: ApiKeyModalProps) {
                 variant="ghost"
                 size="sm"
                 className="text-green-500 hover:text-green-400 hover:bg-green-500/10"
+                onClick={() => {
+                  onOpenChange(false);
+                  navigate('/api-key-instructions');
+                }}
               >
                 Get API Keys
               </Button>
