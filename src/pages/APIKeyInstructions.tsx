@@ -1,8 +1,9 @@
 
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 const apiKeyInstructions = [
   {
@@ -74,9 +75,21 @@ const apiKeyInstructions = [
 ];
 
 export default function APIKeyInstructions() {
+  const navigate = useNavigate();
+
   return (
     <div className="container mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold mb-6">API Key Instructions</h1>
+      <div className="flex items-center gap-4 mb-6">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => navigate(-1)}
+          className="h-10 w-10"
+        >
+          <ArrowLeft className="h-6 w-6" />
+        </Button>
+        <h1 className="text-3xl font-bold">API Key Instructions</h1>
+      </div>
       <p className="text-muted-foreground mb-8">
         Follow the instructions below to obtain API keys for different providers. Make sure to store your keys securely.
       </p>
