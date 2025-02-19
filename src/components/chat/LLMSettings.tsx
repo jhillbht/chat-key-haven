@@ -20,7 +20,7 @@ function ProviderCard({ name, description, isConfigured, isActive, onSettingsCli
         <div className="flex items-center justify-between">
           <h3 className="text-lg font-medium flex items-center gap-2">
             {name}
-            {isActive && <Check className="w-4 h-4 text-green-400" />}
+            {isConfigured && isActive && <Check className="w-4 h-4 text-green-400" />}
           </h3>
         </div>
         <p className="text-sm text-muted-foreground">{description}</p>
@@ -81,46 +81,49 @@ export function LLMSettings() {
       name: "OpenAI",
       description: "Access GPT-4, GPT-3.5 Turbo, and other OpenAI models",
       isConfigured: !!localStorage.getItem("openai_api_key"),
-      isActive: true,
+      isActive: !!localStorage.getItem("openai_api_key"),
     },
     {
       name: "Anthropic",
       description: "Access Claude and other Anthropic models",
       isConfigured: !!localStorage.getItem("anthropic_api_key"),
-      isActive: true,
+      isActive: !!localStorage.getItem("anthropic_api_key"),
     },
     {
       name: "Databricks",
       description: "Access models hosted on your Databricks instance",
       isConfigured: !!localStorage.getItem("databricks_api_key"),
+      isActive: !!localStorage.getItem("databricks_api_key"),
     },
     {
       name: "Groq",
       description: "Access Mixtral and other Groq-hosted models",
       isConfigured: !!localStorage.getItem("groq_api_key"),
-      isActive: true,
+      isActive: !!localStorage.getItem("groq_api_key"),
     },
     {
       name: "Google",
       description: "Access Gemini and other Google AI models",
       isConfigured: !!localStorage.getItem("google_api_key"),
+      isActive: !!localStorage.getItem("google_api_key"),
     },
     {
       name: "Ollama",
       description: "Run and use open-source models locally",
       isConfigured: !!localStorage.getItem("ollama_api_key"),
-      isActive: true,
+      isActive: !!localStorage.getItem("ollama_api_key"),
     },
     {
       name: "OpenRouter",
       description: "Access a variety of AI models through OpenRouter",
       isConfigured: !!localStorage.getItem("openrouter_api_key"),
-      isActive: true,
+      isActive: !!localStorage.getItem("openrouter_api_key"),
     },
     {
       name: "Azure OpenAI",
       description: "Access Azure OpenAI models",
       isConfigured: !!localStorage.getItem("azure_openai_api_key"),
+      isActive: !!localStorage.getItem("azure_openai_api_key"),
     },
   ];
 
