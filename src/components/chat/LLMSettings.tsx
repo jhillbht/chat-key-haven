@@ -1,15 +1,19 @@
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Settings, X, Plus, Check } from "lucide-react";
+import { ApiKeyModal } from "@/components/ApiKeyModal";
+import { toast } from "sonner";
 
 interface ProviderCardProps {
   name: string;
   description: string;
   isConfigured?: boolean;
   isActive?: boolean;
+  onSettingsClick: () => void;
 }
 
-function ProviderCard({ name, description, isConfigured, isActive }: ProviderCardProps) {
+function ProviderCard({ name, description, isConfigured, isActive, onSettingsClick }: ProviderCardProps) {
   return (
     <div className="p-6 rounded-lg border border-chat-border bg-chat-light/10 relative">
       <div className="space-y-2">
@@ -25,6 +29,7 @@ function ProviderCard({ name, description, isConfigured, isActive }: ProviderCar
             variant="ghost"
             size="icon"
             className="hover:bg-chat-light/10"
+            onClick={onSettingsClick}
           >
             <Settings className="w-4 h-4 text-muted-foreground" />
           </Button>
@@ -53,51 +58,69 @@ function ProviderCard({ name, description, isConfigured, isActive }: ProviderCar
 }
 
 export function LLMSettings() {
+  const [selectedProvider, setSelectedProvider] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleSettingsClick = (providerName: string) => {
+    setSelectedProvider(providerName);
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = (apiKey?: string) => {
+    if (apiKey && selectedProvider) {
+      // Store API key in localStorage with provider name as key
+      localStorage.setItem(`${selectedProvider.toLowerCase()}_api_key`, apiKey);
+      toast.success(`${selectedProvider} API key saved successfully`);
+    }
+    setIsModalOpen(false);
+    setSelectedProvider(null);
+  };
+
   const providers = [
     {
       name: "OpenAI",
       description: "Access GPT-4, GPT-3.5 Turbo, and other OpenAI models",
-      isConfigured: true,
+      isConfigured: !!localStorage.getItem("openai_api_key"),
       isActive: true,
     },
     {
       name: "Anthropic",
       description: "Access Claude and other Anthropic models",
-      isConfigured: true,
+      isConfigured: !!localStorage.getItem("anthropic_api_key"),
       isActive: true,
     },
     {
       name: "Databricks",
       description: "Access models hosted on your Databricks instance",
-      isConfigured: false,
+      isConfigured: !!localStorage.getItem("databricks_api_key"),
     },
     {
       name: "Groq",
       description: "Access Mixtral and other Groq-hosted models",
-      isConfigured: true,
+      isConfigured: !!localStorage.getItem("groq_api_key"),
       isActive: true,
     },
     {
       name: "Google",
       description: "Access Gemini and other Google AI models",
-      isConfigured: true,
+      isConfigured: !!localStorage.getItem("google_api_key"),
     },
     {
       name: "Ollama",
       description: "Run and use open-source models locally",
-      isConfigured: true,
+      isConfigured: !!localStorage.getItem("ollama_api_key"),
       isActive: true,
     },
     {
       name: "OpenRouter",
       description: "Access a variety of AI models through OpenRouter",
-      isConfigured: true,
+      isConfigured: !!localStorage.getItem("openrouter_api_key"),
       isActive: true,
     },
     {
       name: "Azure OpenAI",
       description: "Access Azure OpenAI models",
-      isConfigured: false,
+      isConfigured: !!localStorage.getItem("azure_openai_api_key"),
     },
   ];
 
@@ -117,10 +140,19 @@ export function LLMSettings() {
               description={provider.description}
               isConfigured={provider.isConfigured}
               isActive={provider.isActive}
+              onSettingsClick={() => handleSettingsClick(provider.name)}
             />
           ))}
         </div>
       </div>
+
+      <ApiKeyModal 
+        open={isModalOpen} 
+        onOpenChange={(open) => {
+          if (!open) handleModalClose();
+          setIsModalOpen(open);
+        }}
+      />
     </div>
   );
 }

@@ -9,13 +9,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useState } from "react";
 
 interface ApiKeyModalProps {
@@ -25,11 +18,9 @@ interface ApiKeyModalProps {
 
 export function ApiKeyModal({ open, onOpenChange }: ApiKeyModalProps) {
   const [apiKey, setApiKey] = useState("");
-  const [model, setModel] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle API key and model submission
     onOpenChange(false);
   };
 
@@ -37,9 +28,9 @@ export function ApiKeyModal({ open, onOpenChange }: ApiKeyModalProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Welcome to Chat</DialogTitle>
+          <DialogTitle>Add API Key</DialogTitle>
           <DialogDescription>
-            Enter your API key and select your preferred model to get started.
+            Enter your API key to configure this provider.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -63,21 +54,9 @@ export function ApiKeyModal({ open, onOpenChange }: ApiKeyModalProps) {
               onChange={(e) => setApiKey(e.target.value)}
             />
           </div>
-          <div className="space-y-2">
-            <Label>Model</Label>
-            <Select value={model} onValueChange={setModel}>
-              <SelectTrigger>
-                <SelectValue placeholder="Select a model" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="gpt-4o-mini">GPT-4O Mini</SelectItem>
-                <SelectItem value="gpt-4o">GPT-4O</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
           <div className="flex justify-end">
-            <Button type="submit" disabled={!apiKey || !model}>
-              Get Started
+            <Button type="submit" disabled={!apiKey}>
+              Save Key
             </Button>
           </div>
         </form>
