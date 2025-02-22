@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Plus, Link, Database, Server, Workflow, Share } from "lucide-react";
+import { Plus, Link, Database, Server, Workflow, Share, Search } from "lucide-react";
 
 export function MCPWorkflows() {
   const workflows = [
@@ -41,6 +41,13 @@ export function MCPWorkflows() {
       status: "Ready",
       version: "v1",
     },
+    {
+      name: "Reddit Research",
+      description: "Analyze Reddit discussions and trends to gather insights and data",
+      icon: Search,
+      status: "Ready",
+      version: "v1",
+    },
   ];
 
   return (
@@ -48,7 +55,7 @@ export function MCPWorkflows() {
       <div className="max-w-[1200px] mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-semibold text-white">MCP Servers</h1>
+            <h1 className="text-2xl font-semibold text-white">MCP Workflows</h1>
             <p className="text-sm text-gray-400 mt-1">
               Turn any LM System into a custom MCP Server
             </p>
