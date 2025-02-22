@@ -5,6 +5,7 @@ import { MCPSettings } from "./MCPSettings";
 import { LocalLLMSettings } from "./LocalLLMSettings";
 import { LLMSettings } from "./LLMSettings";
 import { ChatHistory } from "./ChatHistory";
+import { MCPWorkflows } from "./MCPWorkflows";
 
 interface ChatMainProps {
   selectedSection?: string;
@@ -25,6 +26,10 @@ export function ChatMain({ selectedSection }: ChatMainProps) {
 
   if (selectedSection === "Chat History") {
     return <ChatHistory />;
+  }
+
+  if (selectedSection === "MCP Workflows") {
+    return <MCPWorkflows />;
   }
 
   return (

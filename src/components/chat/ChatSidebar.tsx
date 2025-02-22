@@ -16,6 +16,7 @@ import {
   Download,
   Package,
   History,
+  Layers,
 } from "lucide-react";
 
 interface ChatSidebarProps {
@@ -46,6 +47,12 @@ const sidebarItems = [
     label: "Chat History",
     tooltip: "View chat history",
     color: "text-purple-400",
+  },
+  {
+    icon: Layers,
+    label: "MCP Workflows",
+    tooltip: "Manage MCP workflows",
+    color: "text-indigo-400",
   },
 ];
 
