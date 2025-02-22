@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Plus, Link, Database, Server, Workflow, Share, Search, Users } from "lucide-react";
+import { Plus, Link, Database, Server, Workflow, Share, Search, Users, Zap } from "lucide-react";
 
 export function MCPWorkflows() {
   const workflows = [
@@ -52,6 +52,13 @@ export function MCPWorkflows() {
       name: "CRM Reengagement",
       description: "Automatically identify and reach out to contacts you haven't connected with in the past 60 days",
       icon: Users,
+      status: "Ready",
+      version: "v1",
+    },
+    {
+      name: "Automation Updater",
+      description: "Connect and optimize workflows across Zapier, Make, GoHighLevel, Flowsie, Langflow & Webhooks platforms",
+      icon: Zap,
       status: "Ready",
       version: "v1",
     },
