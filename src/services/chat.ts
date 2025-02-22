@@ -11,21 +11,22 @@ class ChatService {
 
     initializeModel(config: ModelConfig) {
         if (this.currentConfig?.apiKey === config.apiKey &&
-            this.currentConfig?.provider === config.provider) {
+            this.currentConfig?.provider === config.provider &&
+            this.currentConfig?.modelName === config.modelName) {
             return;
         }
 
-        const modelName = config.modelName || getDefaultModel(config.provider);
+        const { provider, apiKey, modelName, temperature } = config;
 
-        switch (config.provider) {
+        switch (provider) {
             case 'openai':
                 if (!isOpenAIModel(modelName)) {
                     throw new Error(`Invalid OpenAI model: ${modelName}`);
                 }
                 this.chatModel = new ChatOpenAI({
-                    openAIApiKey: config.apiKey,
-                    modelName,
-                    temperature: config.temperature || 0.7,
+                    openAIApiKey: apiKey,
+                    modelName: modelName,
+                    temperature: temperature || 0.7,
                 });
                 break;
             case 'anthropic':
@@ -33,9 +34,9 @@ class ChatService {
                     throw new Error(`Invalid Anthropic model: ${modelName}`);
                 }
                 this.chatModel = new ChatAnthropic({
-                    anthropicApiKey: config.apiKey,
-                    modelName,
-                    temperature: config.temperature || 0.7,
+                    anthropicApiKey: apiKey,
+                    modelName: modelName,
+                    temperature: temperature || 0.7,
                 });
                 break;
             default:
@@ -50,12 +51,21 @@ class ChatService {
             throw new Error('Chat model not initialized. Please set up API key and provider.');
         }
 
-        const response = await this.chatModel.invoke([
-            new HumanMessage({
-                content,
-            }),
-        ]);
-        return response.content.toString();
+        try {
+            const response = await this.chatModel.invoke([
+                new HumanMessage({
+                    content,
+                }),
+            ]);
+            return response.content.toString();
+        } catch (error) {
+            if (error instanceof Error) {
+                if (error.message.includes('API key')) {
+                    throw new Error('Invalid API key. Please check your API key and try again.');
+                }
+            }
+            throw error;
+        }
     }
 }
 

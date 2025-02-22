@@ -16,12 +16,13 @@ export function useChat() {
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Failed to initialize model';
             setError(errorMessage);
+            throw error;
         }
     };
 
     const sendMessage = async (content: string) => {
-        if (!modelConfig) {
-            setError('Please configure a model first');
+        if (!modelConfig?.apiKey) {
+            setError('Please configure a model and API key first');
             return;
         }
 
@@ -30,13 +31,11 @@ export function useChat() {
 
         try {
             const response = await chatService.sendMessage(content);
-
             setMessages(prev => [
                 ...prev,
                 { role: 'user', content },
                 { role: 'assistant', content: response }
             ]);
-
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'An error occurred';
             setError(errorMessage);
