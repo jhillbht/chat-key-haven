@@ -3,6 +3,7 @@ import { ChatAnthropic } from "@langchain/anthropic";
 import { HumanMessage } from "@langchain/core/messages";
 import { BaseChatModel } from "@langchain/core/language_models/chat_models";
 import { ModelConfig, ModelProvider } from "@/types/chat";
+import { isOpenAIModel, isAnthropicModel, getDefaultModel } from "@/config/models";
 
 class ChatService {
     private chatModel: BaseChatModel | null = null;
@@ -11,21 +12,29 @@ class ChatService {
     initializeModel(config: ModelConfig) {
         if (this.currentConfig?.apiKey === config.apiKey &&
             this.currentConfig?.provider === config.provider) {
-            return; // Already initialized with same config
+            return;
         }
+
+        const modelName = config.modelName || getDefaultModel(config.provider);
 
         switch (config.provider) {
             case 'openai':
+                if (!isOpenAIModel(modelName)) {
+                    throw new Error(`Invalid OpenAI model: ${modelName}`);
+                }
                 this.chatModel = new ChatOpenAI({
                     openAIApiKey: config.apiKey,
-                    modelName: config.modelName || 'gpt-3.5-turbo',
+                    modelName,
                     temperature: config.temperature || 0.7,
                 });
                 break;
             case 'anthropic':
+                if (!isAnthropicModel(modelName)) {
+                    throw new Error(`Invalid Anthropic model: ${modelName}`);
+                }
                 this.chatModel = new ChatAnthropic({
                     anthropicApiKey: config.apiKey,
-                    modelName: config.modelName || 'claude-3-sonnet',
+                    modelName,
                     temperature: config.temperature || 0.7,
                 });
                 break;
