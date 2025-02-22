@@ -24,7 +24,7 @@ export function ChatMain({ selectedSection }: ChatMainProps) {
     return <LLMSettings />;
   }
 
-  if (selectedSection === "Chat History") {
+  if (selectedSection === "Memory Graph") {
     return <ChatHistory />;
   }
 

@@ -44,8 +44,8 @@ const sidebarItems = [
   },
   {
     icon: History,
-    label: "Chat History",
-    tooltip: "View chat history",
+    label: "Memory Graph",
+    tooltip: "View memory graph",
     color: "text-purple-400",
   },
   {
