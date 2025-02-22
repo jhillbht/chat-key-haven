@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Plus, Link, Database, Server, Workflow, Share, Search } from "lucide-react";
+import { Plus, Link, Database, Server, Workflow, Share, Search, Users } from "lucide-react";
 
 export function MCPWorkflows() {
   const workflows = [
@@ -45,6 +45,13 @@ export function MCPWorkflows() {
       name: "Reddit Research",
       description: "Analyze Reddit discussions and trends to gather insights and data",
       icon: Search,
+      status: "Ready",
+      version: "v1",
+    },
+    {
+      name: "CRM Reengagement",
+      description: "Automatically identify and reach out to contacts you haven't connected with in the past 60 days",
+      icon: Users,
       status: "Ready",
       version: "v1",
     },
